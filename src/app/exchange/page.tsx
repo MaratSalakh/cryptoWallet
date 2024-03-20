@@ -9,7 +9,7 @@ import FiatButtons from "@/UI/FiatButtons";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 // or `v1X-appRouter` if you are using Next.js v1X
 
-export default function RootLayout(props: any) {
+export default function ExchangePage(props: any) {
   return (
     <html lang="en">
       <body>
