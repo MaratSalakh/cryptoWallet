@@ -1,6 +1,8 @@
 "use client";
 
-import { Grid, TextField, Button } from "@mui/material";
+import { DiscoverWalletProviders } from "@/components/DiscoverWalletProviders";
+
+import { Grid, TextField, Button, Card, Box } from "@mui/material";
 
 import Header from "@/UI/Header";
 import CryptoButtons from "@/UI/CryptoButtons";
@@ -16,10 +18,11 @@ export default function AppPage() {
   const [fiatInput, setFiatInput] = useState("");
 
   return (
-    <html lang="en">
-      <body>
-        <AppRouterCacheProvider>
-          <Grid container spacing={2}>
+    <AppRouterCacheProvider>
+      <DiscoverWalletProviders />
+      <Box my={1}>
+        <Card variant="outlined">
+          <Grid container spacing={2} m={1}>
             <Grid container item md={12}>
               <Header></Header>
             </Grid>
@@ -54,12 +57,12 @@ export default function AppPage() {
                 />
               </Grid>
             </Grid>
-            <Grid container item>
+            <Grid container item mb={2}>
               <Button variant="contained">Buy</Button>
             </Grid>
           </Grid>
-        </AppRouterCacheProvider>
-      </body>
-    </html>
+        </Card>
+      </Box>
+    </AppRouterCacheProvider>
   );
 }

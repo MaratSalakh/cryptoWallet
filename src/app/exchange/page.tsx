@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Button, Card, Box } from "@mui/material";
 
 import Header from "@/UI/Header";
 import CryptoButtons from "@/UI/CryptoButtons";
@@ -15,10 +15,10 @@ export default function ExchangePage(props: any) {
   const [InputTo, setInputTo] = useState("");
 
   return (
-    <html lang="en">
-      <body>
-        <AppRouterCacheProvider>
-          <Grid container spacing={2}>
+    <AppRouterCacheProvider>
+      <Box my={1}>
+        <Card variant="outlined">
+          <Grid container spacing={2} m={1}>
             <Grid container item md={12}>
               <Header></Header>
             </Grid>
@@ -53,13 +53,13 @@ export default function ExchangePage(props: any) {
                 />
               </Grid>
             </Grid>
-            <Grid container item>
+            <Grid container item mb={2}>
               <Button variant="contained">Buy</Button>
             </Grid>
           </Grid>
           {props.children}
-        </AppRouterCacheProvider>
-      </body>
-    </html>
+        </Card>
+      </Box>
+    </AppRouterCacheProvider>
   );
 }
