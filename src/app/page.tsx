@@ -1,14 +1,12 @@
 "use client";
 
-import { DiscoverWalletProviders } from "@/components/DiscoverWalletProviders";
-
 import { Grid, TextField, Button, Card, Box } from "@mui/material";
 
 import Header from "@/UI/Header";
 import CryptoButtons from "@/UI/CryptoButtons";
 import FiatButtons from "@/UI/FiatButtons";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 // or `v1X-appRouter` if you are using Next.js v1X
@@ -19,7 +17,6 @@ export default function AppPage() {
 
   return (
     <AppRouterCacheProvider>
-      <DiscoverWalletProviders />
       <Box my={1}>
         <Card variant="outlined">
           <Grid container spacing={2} m={1}>
