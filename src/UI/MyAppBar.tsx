@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -7,7 +9,49 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import { useState } from "react";
+
+import {
+  connect,
+  disconnect,
+  getAccount,
+  getBalance,
+  type GetBalanceReturnType,
+} from "@wagmi/core";
+import { injected } from "@wagmi/connectors";
+import { config } from "../../config";
+import { Address } from "viem";
+
 export default function MyAppBar() {
+  const [account, setAccount] = useState<Address>();
+  const [balance, setBalance] = useState<GetBalanceReturnType>();
+
+  const connectToWallet = async () => {
+    try {
+      await connect(config, { connector: injected() });
+      const address = await getAccount(config).address;
+      await setAccount(address);
+      let balance;
+      if (address !== undefined) {
+        balance = await getBalance(config, {
+          address: address,
+        });
+      }
+      await setBalance(balance);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const disconnectFromWallet = async () => {
+    try {
+      const { connector } = getAccount(config);
+      const result = await disconnect(config, { connector });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -22,9 +66,17 @@ export default function MyAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            {account}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {`${balance?.value} ${balance?.symbol}`}
+          </Typography>
+          <Button color="inherit" onClick={() => connectToWallet()}>
+            Login
+          </Button>
+          <Button color="inherit" onClick={() => disconnectFromWallet()}>
+            Disconnect
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
