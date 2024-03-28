@@ -21,14 +21,33 @@ import {
 import { injected } from "@wagmi/connectors";
 import { config } from "../../config";
 import { Address } from "viem";
+import { bsc, mainnet } from "viem/chains";
 
 export default function MyAppBar() {
   const [account, setAccount] = useState<Address>();
   const [balance, setBalance] = useState<GetBalanceReturnType>();
+  const [chain, setChain] = useState("eth");
 
-  const connectToWallet = async () => {
+  const connectToETH = async () => {
     try {
-      await connect(config, { connector: injected() });
+      await connect(config, { connector: injected(), chainId: mainnet.id });
+      const address = await getAccount(config).address;
+      await setAccount(address);
+      let balance;
+      if (address !== undefined) {
+        balance = await getBalance(config, {
+          address: address,
+        });
+      }
+      await setBalance(balance);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const connectToBSC = async () => {
+    try {
+      await connect(config, { connector: injected(), chainId: bsc.id });
       const address = await getAccount(config).address;
       await setAccount(address);
       let balance;
@@ -71,11 +90,11 @@ export default function MyAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {`${balance?.value} ${balance?.symbol}`}
           </Typography>
-          <Button color="inherit" onClick={() => connectToWallet()}>
-            Login
+          <Button color="inherit" onClick={() => connectToETH()}>
+            Connect to ETH
           </Button>
-          <Button color="inherit" onClick={() => disconnectFromWallet()}>
-            Disconnect
+          <Button color="inherit" onClick={() => connectToBSC()}>
+            Connect to BSC
           </Button>
         </Toolbar>
       </AppBar>

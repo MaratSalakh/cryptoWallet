@@ -16,49 +16,58 @@ export default function ExchangePage(props: any) {
 
   return (
     <AppRouterCacheProvider>
-      <Box my={1}>
-        <Card variant="outlined">
-          <Grid container spacing={2} m={1}>
-            <Grid container item md={12}>
-              <Header></Header>
-            </Grid>
-            <Grid container item spacing={2}>
-              <Grid container item md={4}>
-                <CryptoButtons></CryptoButtons>
-              </Grid>
-              <Grid container item md={3} direction={"row-reverse"}>
-                <CryptoButtons></CryptoButtons>
-              </Grid>
-            </Grid>
-            <Grid container item spacing={2}>
-              <Grid container item md={3}>
-                <TextField
-                  onChange={(e) => setInputFrom(e.target.value)}
-                  value={InputFrom}
-                  id="filled-basic"
-                  label="Filled"
-                  variant="filled"
-                />
-              </Grid>
-              <Grid container item md={1}>
-                =
-              </Grid>
-              <Grid container item md={3} direction={"row-reverse"}>
-                <TextField
-                  onChange={(e) => setInputTo(e.target.value)}
-                  value={InputTo}
-                  id="filled-basic"
-                  label="Filled"
-                  variant="filled"
-                />
-              </Grid>
-            </Grid>
-            <Grid container item mb={2}>
-              <Button variant="contained">Buy</Button>
+      <Box my={2}>
+        <Grid container spacing={2}>
+          <Grid container item>
+            <Grid container item>
+              <TextField id="filled-basic" label="Address" variant="outlined" />
             </Grid>
           </Grid>
-          {props.children}
-        </Card>
+          <Grid container item>
+            <Card variant="outlined">
+              <Grid container spacing={2} m={1}>
+                <Grid container item md={12}>
+                  <Header></Header>
+                </Grid>
+                <Grid container item spacing={2}>
+                  <Grid container item md={4}>
+                    <CryptoButtons></CryptoButtons>
+                  </Grid>
+                  <Grid container item md={3} direction={"row-reverse"}>
+                    <CryptoButtons></CryptoButtons>
+                  </Grid>
+                </Grid>
+                <Grid container item spacing={2}>
+                  <Grid container item md={3}>
+                    <TextField
+                      onChange={(e) => setInputFrom(e.target.value)}
+                      value={InputFrom}
+                      id="filled-basic"
+                      label="Filled"
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid container item md={1}>
+                    =
+                  </Grid>
+                  <Grid container item md={3} direction={"row-reverse"}>
+                    <TextField
+                      onChange={(e) => setInputTo(e.target.value)}
+                      value={InputTo}
+                      id="filled-basic"
+                      label="Filled"
+                      variant="outlined"
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container item mb={2}>
+                  <Button variant="contained">Exchange</Button>
+                </Grid>
+              </Grid>
+              {props.children}
+            </Card>
+          </Grid>
+        </Grid>
       </Box>
     </AppRouterCacheProvider>
   );
