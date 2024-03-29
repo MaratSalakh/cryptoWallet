@@ -1,6 +1,14 @@
 "use client";
 
-import { Grid, TextField, Button, Card, Box } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  Card,
+  Box,
+  IconButton,
+  CardContent,
+} from "@mui/material";
 
 import Header from "@/UI/Header";
 import CryptoButtons from "@/UI/CryptoButtons";
@@ -9,6 +17,8 @@ import FiatButtons from "@/UI/FiatButtons";
 import { useState } from "react";
 
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 // or `v1X-appRouter` if you are using Next.js v1X
 
 export default function AppPage() {
@@ -17,52 +27,65 @@ export default function AppPage() {
 
   return (
     <AppRouterCacheProvider>
-      <Box my={2}>
+      <Box m={2}>
         <Grid container spacing={2}>
-          <Grid container item>
+          <Grid item md={12}>
             <TextField id="filled-basic" label="Address" variant="outlined" />
           </Grid>
-          <Grid container item>
+
+          <Grid item md={8}>
             <Card variant="outlined">
-              <Grid container spacing={2} m={1}>
-                <Grid container item md={12}>
-                  <Header></Header>
+              <CardContent>
+                <Grid container spacing={2} item m={1}>
+                  <Grid item>
+                    <Header></Header>
+                  </Grid>
+
+                  <Grid
+                    container
+                    item
+                    spacing={2}
+                    justifyContent={"space-between"}
+                  >
+                    <Grid item md={3}>
+                      <CryptoButtons></CryptoButtons>
+                    </Grid>
+                    <Grid item md={3} justifyContent={"right"}>
+                      <FiatButtons></FiatButtons>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container item justifyContent={"space-between"}>
+                    <Grid item md={4}>
+                      <TextField
+                        onChange={(e) => setCryptoInput(e.target.value)}
+                        value={cryptoInput}
+                        id="filled-basic"
+                        label="Filled"
+                        variant="outlined"
+                      />
+                    </Grid>
+                    <Grid item md={1} alignContent="center">
+                      <IconButton color="primary">
+                        <CurrencyExchangeIcon></CurrencyExchangeIcon>
+                      </IconButton>
+                    </Grid>
+                    <Grid item md={4} mr={5}>
+                      <TextField
+                        onChange={(e) => setFiatInput(e.target.value)}
+                        value={fiatInput}
+                        label="Filled"
+                        id="filled-basic"
+                        variant="outlined"
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <Grid item mb={2}>
+                    <Button variant="contained">Buy</Button>
+                  </Grid>
                 </Grid>
-                <Grid container item spacing={2}>
-                  <Grid container item md={4}>
-                    <CryptoButtons></CryptoButtons>
-                  </Grid>
-                  <Grid container item md={3} direction={"row-reverse"}>
-                    <FiatButtons></FiatButtons>
-                  </Grid>
-                </Grid>
-                <Grid container item spacing={2}>
-                  <Grid container item md={3}>
-                    <TextField
-                      onChange={(e) => setCryptoInput(e.target.value)}
-                      value={cryptoInput}
-                      id="filled-basic"
-                      label="Filled"
-                      variant="outlined"
-                    />
-                  </Grid>
-                  <Grid container item md={1}>
-                    =
-                  </Grid>
-                  <Grid container item md={3} direction={"row-reverse"}>
-                    <TextField
-                      onChange={(e) => setFiatInput(e.target.value)}
-                      value={fiatInput}
-                      id="filled-basic"
-                      label="Filled"
-                      variant="outlined"
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container item mb={2}>
-                  <Button variant="contained">Buy</Button>
-                </Grid>
-              </Grid>
+              </CardContent>
             </Card>
           </Grid>
         </Grid>
