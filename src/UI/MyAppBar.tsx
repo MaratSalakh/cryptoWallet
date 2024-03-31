@@ -26,7 +26,6 @@ import { CssBaseline, SvgIcon } from "@mui/material";
 export default function MyAppBar() {
   const [account, setAccount] = useState<Address>();
   const [balance, setBalance] = useState<GetBalanceReturnType>();
-  const [chain, setChain] = useState("eth");
 
   const connectToETH = async () => {
     try {
@@ -57,15 +56,6 @@ export default function MyAppBar() {
         });
       }
       await setBalance(balance);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const disconnectFromWallet = async () => {
-    try {
-      const { connector } = getAccount(config);
-      const result = await disconnect(config, { connector });
     } catch (e) {
       console.log(e);
     }
@@ -102,10 +92,13 @@ export default function MyAppBar() {
             </SvgIcon>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {account}
+            Wallet adress:
+            {account === undefined ? " not connect" : account}
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {`${balance?.value} ${balance?.symbol}`}
+            {`Balance:${balance?.value === undefined ? "" : balance?.value} ${
+              balance?.symbol === undefined ? " not connect" : balance?.symbol
+            }`}
           </Typography>
           <Button color="inherit" onClick={() => connectToETH()}>
             Connect to ETH
