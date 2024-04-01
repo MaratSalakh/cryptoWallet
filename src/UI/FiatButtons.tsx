@@ -4,14 +4,20 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { SvgIcon } from "@mui/material";
 import usdt from "../../node_modules/cryptocurrency-icons/svg/white/eth.svg";
 
-export default function ToggleButtons() {
-  const [alignment, setAlignment] = React.useState<string | null>("left");
+export default function ToggleButtons(props: {
+  setSelectedFiat: Function;
+  selectedFiat: string | null;
+}) {
+  const { setSelectedFiat, selectedFiat } = props;
+
+  const [alignment, setAlignment] = React.useState<string | null>(selectedFiat);
 
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
     setAlignment(newAlignment);
+    setSelectedFiat(newAlignment);
   };
 
   return (

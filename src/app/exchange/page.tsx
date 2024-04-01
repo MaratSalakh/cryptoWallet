@@ -12,6 +12,7 @@ import {
 
 import Header from "@/UI/Header";
 import CryptoButtons from "@/UI/CryptoButtons";
+import SecondCryptoButtons from "@/UI/SecondCryptoButtons";
 
 import { useState } from "react";
 
@@ -24,6 +25,8 @@ export default function ExchangePage(props: any) {
   const [InputFrom, setInputFrom] = useState("");
   const [InputTo, setInputTo] = useState("");
   const [orderOfInputs, setOrderOfInputs] = useState("standart");
+  const [cryptoFirst, setCryptoFirst] = useState("BTC");
+  const [cryptoSecond, setCryptoSecond] = useState("BTC");
 
   const changeOrder = () => {
     if (orderOfInputs === "standart") {
@@ -46,10 +49,16 @@ export default function ExchangePage(props: any) {
 
             <Grid container item spacing={2} justifyContent={"space-between"}>
               <Grid item md={3}>
-                <CryptoButtons></CryptoButtons>
+                <CryptoButtons
+                  setSelectedCrypto={setCryptoFirst}
+                  selectedCrypto={cryptoFirst}
+                ></CryptoButtons>
               </Grid>
               <Grid item md={3} justifyContent={"right"}>
-                <CryptoButtons></CryptoButtons>
+                <SecondCryptoButtons
+                  setSelectedCrypto={setCryptoSecond}
+                  selectedCrypto={cryptoSecond}
+                ></SecondCryptoButtons>
               </Grid>
             </Grid>
 
@@ -99,10 +108,16 @@ export default function ExchangePage(props: any) {
 
             <Grid container item spacing={2} justifyContent={"space-between"}>
               <Grid item md={3}>
-                <CryptoButtons></CryptoButtons>
+                <SecondCryptoButtons
+                  setSelectedCrypto={setCryptoSecond}
+                  selectedCrypto={cryptoSecond}
+                ></SecondCryptoButtons>
               </Grid>
               <Grid item md={3} justifyContent={"right"}>
-                <CryptoButtons></CryptoButtons>
+                <CryptoButtons
+                  setSelectedCrypto={setCryptoFirst}
+                  selectedCrypto={cryptoFirst}
+                ></CryptoButtons>
               </Grid>
             </Grid>
 

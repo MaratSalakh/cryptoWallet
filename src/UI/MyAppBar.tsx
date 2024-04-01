@@ -12,7 +12,6 @@ import { useState } from "react";
 
 import {
   connect,
-  disconnect,
   getAccount,
   getBalance,
   type GetBalanceReturnType,
@@ -44,7 +43,7 @@ export default function MyAppBar() {
     }
   };
 
-  const connectToBSC = async () => {
+  const connectToBNB = async () => {
     try {
       await connect(config, { connector: injected(), chainId: bsc.id });
       const address = await getAccount(config).address;
@@ -93,18 +92,27 @@ export default function MyAppBar() {
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Wallet adress:
-            {account === undefined ? " not connect" : account}
+            {account === undefined ? " not connect" : ` ${account}`}
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {`Balance:${balance?.value === undefined ? "" : balance?.value} ${
+            {`Balance: ${balance?.value === undefined ? "" : balance?.value} ${
               balance?.symbol === undefined ? " not connect" : balance?.symbol
             }`}
           </Typography>
-          <Button color="inherit" onClick={() => connectToETH()}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={() => connectToETH()}
+            sx={{ marginRight: "5px" }}
+          >
             Connect to ETH
           </Button>
-          <Button color="inherit" onClick={() => connectToBSC()}>
-            Connect to BSC
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={() => connectToBNB()}
+          >
+            Connect to BNB
           </Button>
         </Toolbar>
       </AppBar>

@@ -25,8 +25,8 @@ export default function AppPage() {
   const [cryptoInput, setCryptoInput] = useState("");
   const [fiatInput, setFiatInput] = useState("");
   const [orderOfInputs, setOrderOfInputs] = useState("standart");
-  const [selectedCrypto, setSelectedCrypto] = useState(null);
-  const [selectedFiat, setSelectedFiat] = useState(null);
+  const [selectedCrypto, setSelectedCrypto] = useState("BTC");
+  const [selectedFiat, setSelectedFiat] = useState("USD");
 
   const changeOrder = () => {
     if (orderOfInputs === "standart") {
@@ -49,10 +49,16 @@ export default function AppPage() {
 
             <Grid container item spacing={2} justifyContent={"space-between"}>
               <Grid item md={3}>
-                <CryptoButtons></CryptoButtons>
+                <CryptoButtons
+                  setSelectedCrypto={setSelectedCrypto}
+                  selectedCrypto={selectedCrypto}
+                ></CryptoButtons>
               </Grid>
               <Grid item md={3} justifyContent={"right"}>
-                <FiatButtons></FiatButtons>
+                <FiatButtons
+                  setSelectedFiat={setSelectedFiat}
+                  selectedFiat={selectedFiat}
+                ></FiatButtons>
               </Grid>
             </Grid>
 
@@ -102,10 +108,16 @@ export default function AppPage() {
 
             <Grid container item spacing={2} justifyContent={"space-between"}>
               <Grid item md={3}>
-                <FiatButtons></FiatButtons>
+                <FiatButtons
+                  setSelectedFiat={setSelectedFiat}
+                  selectedFiat={selectedFiat}
+                ></FiatButtons>
               </Grid>
               <Grid item md={3} justifyContent={"right"}>
-                <CryptoButtons></CryptoButtons>
+                <CryptoButtons
+                  setSelectedCrypto={setSelectedCrypto}
+                  selectedCrypto={selectedCrypto}
+                ></CryptoButtons>
               </Grid>
             </Grid>
 

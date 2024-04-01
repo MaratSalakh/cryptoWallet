@@ -3,7 +3,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { SvgIcon } from "@mui/material";
 
-export default function CryptoButtons(props: {
+export default function SecondCryptoButtons(props: {
   setSelectedCrypto: Function;
   selectedCrypto: string | null;
 }) {
