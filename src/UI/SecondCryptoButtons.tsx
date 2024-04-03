@@ -9,21 +9,16 @@ export default function SecondCryptoButtons(props: {
 }) {
   const { setSelectedCrypto, selectedCrypto } = props;
 
-  const [alignment, setAlignment] = React.useState<string | null>(
-    selectedCrypto
-  );
-
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
-    setAlignment(newAlignment);
     setSelectedCrypto(newAlignment);
   };
 
   return (
     <ToggleButtonGroup
-      value={alignment}
+      value={selectedCrypto}
       exclusive
       onChange={handleAlignment}
       aria-label="text alignment"

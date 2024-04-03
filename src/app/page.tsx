@@ -176,7 +176,6 @@ export default function AppPage() {
               <Grid item md={4} mr={5}>
                 <TextField
                   disabled
-                  onChange={(e) => setCryptoInput(+e.target.value)}
                   value={fiatInput / pairCurrence}
                   id="filled-basic"
                   label="Crypto"
