@@ -10,19 +10,16 @@ export default function ToggleButtons(props: {
 }) {
   const { setSelectedFiat, selectedFiat } = props;
 
-  const [alignment, setAlignment] = React.useState<string | null>(selectedFiat);
-
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
-    setAlignment(newAlignment);
     setSelectedFiat(newAlignment);
   };
 
   return (
     <ToggleButtonGroup
-      value={alignment}
+      value={selectedFiat}
       exclusive
       onChange={handleAlignment}
       aria-label="text alignment"
@@ -47,7 +44,7 @@ export default function ToggleButtons(props: {
           </svg>
         </SvgIcon>
       </ToggleButton>
-      <ToggleButton value="RU" aria-label="right aligned">
+      <ToggleButton value="RUB" aria-label="right aligned">
         <SvgIcon>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33">
             <path
