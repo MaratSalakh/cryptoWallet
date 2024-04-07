@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import MyDrawer from "@/UI/MyDrawer";
 
 import { useState } from "react";
 
@@ -26,6 +27,7 @@ import { CssBaseline, SvgIcon } from "@mui/material";
 export default function MyAppBar() {
   const [account, setAccount] = useState<Address>();
   const [balance, setBalance] = useState<GetBalanceReturnType>();
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const connectToETH = async () => {
     try {
@@ -127,11 +129,18 @@ export default function MyAppBar() {
           </Button>
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <MyDrawer
+              account={account}
+              balance={balance}
+              openDrawer={openDrawer}
+              setOpenDrawer={setOpenDrawer}
+            ></MyDrawer>
+
             <Button
               variant="text"
               color="primary"
               aria-label="menu"
-              // onClick={toggleDrawer(true)}
+              onClick={() => setOpenDrawer(true)}
               sx={{ minWidth: "30px", p: "4px" }}
             >
               <MenuIcon sx={{ color: "white" }} />
