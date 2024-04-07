@@ -6,6 +6,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
 
 import { Address } from "viem";
 import { type GetBalanceReturnType } from "@wagmi/core";
@@ -16,8 +17,17 @@ export default function TemporaryDrawer(props: {
   balance: GetBalanceReturnType | undefined;
   setOpenDrawer: Function;
   openDrawer: boolean;
+  connectToETH: Function;
+  connectToBNB: Function;
 }) {
-  const { setOpenDrawer, openDrawer, account, balance } = props;
+  const {
+    setOpenDrawer,
+    openDrawer,
+    account,
+    balance,
+    connectToETH,
+    connectToBNB,
+  } = props;
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpenDrawer(newOpen);
@@ -37,7 +47,7 @@ export default function TemporaryDrawer(props: {
                   variant="body2"
                   color="text.secondary"
                 >
-                  {account}
+                  {account === undefined ? "not connect" : account}
                 </Typography>
               </>
             }
@@ -57,11 +67,28 @@ export default function TemporaryDrawer(props: {
                   variant="body2"
                   color="text.secondary"
                 >
-                  {`${balance?.value === undefined ? "" : balance?.value}`}
+                  {`${
+                    balance?.value === undefined
+                      ? "not connect"
+                      : balance?.value
+                  } ${balance?.symbol === undefined ? "" : balance?.symbol}`}
                 </Typography>
               </>
             }
           />
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => connectToETH()}>
+            <ListItemText primary="Connect to ETH" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => connectToBNB()}>
+            <ListItemText primary="Connect to BNB" />
+          </ListItemButton>
         </ListItem>
       </List>
     </Box>
@@ -69,7 +96,6 @@ export default function TemporaryDrawer(props: {
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}>Open drawer</Button>
       <Drawer open={openDrawer} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>

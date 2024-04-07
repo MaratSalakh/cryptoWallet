@@ -104,6 +104,7 @@ export default function MyAppBar() {
           <Typography
             variant="h6"
             component="div"
+            mx={3}
             sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}
           >
             {`Balance: ${balance?.value === undefined ? "" : balance?.value} ${
@@ -134,6 +135,8 @@ export default function MyAppBar() {
               balance={balance}
               openDrawer={openDrawer}
               setOpenDrawer={setOpenDrawer}
+              connectToETH={connectToETH}
+              connectToBNB={connectToBNB}
             ></MyDrawer>
 
             <Button
