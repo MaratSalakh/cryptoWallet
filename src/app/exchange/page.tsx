@@ -22,15 +22,22 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 
 export default function ExchangePage(props: any) {
-  const [inputFirst, setInputFirst] = useState(0);
-  const [inputSecond, setInputSecond] = useState(0);
+  const [inputFirst, setInputFirst] = useState<null | number>(null);
   const [orderOfInputs, setOrderOfInputs] = useState("standart");
   const [cryptoFirst, setCryptoFirst] = useState("BTC");
   const [cryptoSecond, setCryptoSecond] = useState("BTC");
   const [pairCurrence, setPairCurrence] = useState(1);
 
+  const handleInputFirst = (value: number) => {
+    if (typeof value === "number") {
+      setInputFirst(value);
+      return;
+    }
+    return;
+  };
+
   const changeOrder = () => {
-    setInputFirst(inputFirst * pairCurrence);
+    setInputFirst(inputFirst !== null ? inputFirst * pairCurrence : 0);
     const variableForChangeCrypto = cryptoFirst;
     setCryptoFirst(cryptoSecond);
     setCryptoSecond(variableForChangeCrypto);
@@ -101,7 +108,8 @@ export default function ExchangePage(props: any) {
               sx={{ flexDirection: { xs: "column", md: "row" } }}
             >
               <TextField
-                onChange={(e) => setInputFirst(+e.target.value)}
+                type="number"
+                onChange={(e) => handleInputFirst(parseFloat(e.target.value))}
                 value={inputFirst}
                 id="filled-basic"
                 label="Crypto"
@@ -118,7 +126,7 @@ export default function ExchangePage(props: any) {
               <TextField
                 disabled
                 // onChange={(e) => setInputSecond(+e.target.value)}
-                value={inputFirst * pairCurrence}
+                value={inputFirst !== null ? inputFirst * pairCurrence : 0}
                 label="Crypto"
                 id="filled-basic"
                 variant="outlined"

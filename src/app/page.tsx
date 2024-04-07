@@ -17,17 +17,33 @@ import FiatButtons from "@/UI/FiatButtons";
 import { useEffect, useState } from "react";
 
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 // or `v1X-appRouter` if you are using Next.js v1X
 
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+
 export default function AppPage() {
-  const [cryptoInput, setCryptoInput] = useState(0);
-  const [fiatInput, setFiatInput] = useState(0);
+  const [cryptoInput, setCryptoInput] = useState<number | null>(null);
+  const [fiatInput, setFiatInput] = useState<number | null>(null);
   const [orderOfInputs, setOrderOfInputs] = useState("standart");
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [selectedFiat, setSelectedFiat] = useState("USD");
   const [pairCurrence, setPairCurrence] = useState(60000);
+
+  const handleCryptoInput = (value: number) => {
+    if (typeof value === "number") {
+      setCryptoInput(value);
+      return;
+    }
+    return;
+  };
+
+  const handleFiatInput = (value: number) => {
+    if (typeof value === "number") {
+      setFiatInput(value);
+      return;
+    }
+    return;
+  };
 
   const changeOrder = () => {
     if (orderOfInputs === "standart") {
@@ -96,8 +112,9 @@ export default function AppPage() {
               sx={{ flexDirection: { xs: "column", md: "row" } }}
             >
               <TextField
+                type="number"
                 onChange={(e) => {
-                  setCryptoInput(+e.target.value);
+                  handleCryptoInput(parseFloat(e.target.value));
                 }}
                 value={cryptoInput}
                 id="filled-basic"
@@ -107,7 +124,9 @@ export default function AppPage() {
               <IconButton
                 onClick={() => {
                   changeOrder();
-                  setFiatInput(cryptoInput * pairCurrence);
+                  setFiatInput(
+                    cryptoInput !== null ? cryptoInput * pairCurrence : 0
+                  );
                 }}
                 color="primary"
               >
@@ -115,7 +134,7 @@ export default function AppPage() {
               </IconButton>
               <TextField
                 disabled
-                value={cryptoInput * pairCurrence}
+                value={cryptoInput !== null ? cryptoInput * pairCurrence : 0}
                 label="Fiat"
                 id="filled-basic"
                 variant="outlined"
@@ -166,7 +185,8 @@ export default function AppPage() {
               sx={{ flexDirection: { xs: "column", md: "row" } }}
             >
               <TextField
-                onChange={(e) => setFiatInput(+e.target.value)}
+                type="number"
+                onChange={(e) => handleFiatInput(parseFloat(e.target.value))}
                 value={fiatInput}
                 label="Fiat"
                 id="filled-basic"
@@ -175,7 +195,9 @@ export default function AppPage() {
               <IconButton
                 onClick={() => {
                   changeOrder();
-                  setCryptoInput(fiatInput / pairCurrence);
+                  setCryptoInput(
+                    fiatInput !== null ? fiatInput / pairCurrence : 0
+                  );
                 }}
                 color="primary"
               >
@@ -183,7 +205,7 @@ export default function AppPage() {
               </IconButton>
               <TextField
                 disabled
-                value={fiatInput / pairCurrence}
+                value={fiatInput !== null ? fiatInput / pairCurrence : 0}
                 id="filled-basic"
                 label="Crypto"
                 variant="outlined"
