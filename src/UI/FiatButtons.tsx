@@ -14,7 +14,9 @@ export default function ToggleButtons(props: {
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
-    setSelectedFiat(newAlignment);
+    if (newAlignment !== null) {
+      setSelectedFiat(newAlignment);
+    }
   };
 
   return (

@@ -13,7 +13,9 @@ export default function CryptoButtons(props: {
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
-    setSelectedCrypto(newAlignment);
+    if (newAlignment !== null) {
+      setSelectedCrypto(newAlignment);
+    }
   };
 
   return (
