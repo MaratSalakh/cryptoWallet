@@ -7,6 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import { useState } from "react";
 
@@ -64,7 +65,7 @@ export default function MyAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <CssBaseline></CssBaseline>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton
             size="large"
             edge="start"
@@ -90,20 +91,29 @@ export default function MyAppBar() {
               </svg>
             </SvgIcon>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}
+          >
             Wallet adress:
             {account === undefined ? " not connect" : ` ${account}`}
           </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}
+          >
             {`Balance: ${balance?.value === undefined ? "" : balance?.value} ${
               balance?.symbol === undefined ? " not connect" : balance?.symbol
             }`}
           </Typography>
+
           <Button
             variant="outlined"
             color="inherit"
             onClick={() => connectToETH()}
-            sx={{ marginRight: "5px" }}
+            sx={{ marginRight: "5px", display: { xs: "none", md: "block" } }}
           >
             Connect to ETH
           </Button>
@@ -111,9 +121,22 @@ export default function MyAppBar() {
             variant="outlined"
             color="inherit"
             onClick={() => connectToBNB()}
+            sx={{ display: { xs: "none", md: "block" } }}
           >
             Connect to BNB
           </Button>
+
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <Button
+              variant="text"
+              color="primary"
+              aria-label="menu"
+              // onClick={toggleDrawer(true)}
+              sx={{ minWidth: "30px", p: "4px" }}
+            >
+              <MenuIcon sx={{ color: "white" }} />
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

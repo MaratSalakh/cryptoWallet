@@ -54,72 +54,75 @@ export default function ExchangePage(props: any) {
     } else if (cryptoFirst === "ETH" && cryptoSecond === "ETH") {
       setPairCurrence(1);
     } else if (cryptoFirst === "ETH" && cryptoSecond === "BTC") {
-      setPairCurrence(0.05);
+      setPairCurrence(1 / 20);
     } else if (cryptoFirst === "ETH" && cryptoSecond === "USDT") {
       setPairCurrence(3300);
     } else if (cryptoFirst === "USDT" && cryptoSecond === "USDT") {
       setPairCurrence(1);
     } else if (cryptoFirst === "USDT" && cryptoSecond === "BTC") {
-      setPairCurrence(0.000015);
+      setPairCurrence(1 / 60000);
     } else if (cryptoFirst === "USDT" && cryptoSecond === "ETH") {
-      setPairCurrence(0.0003);
+      setPairCurrence(1 / 3300);
     }
   }, [cryptoFirst, cryptoSecond]);
 
   const standartOrder = (
-    <Grid item md={8}>
-      <Card variant="outlined">
+    <Grid item md={10} lg={8}>
+      <Card variant="outlined" sx={{ paddingRight: "50px" }}>
         <CardContent>
-          <Grid container spacing={2} item m={1}>
+          <Grid container item spacing={2} m={1}>
             <Grid item>
               <Header></Header>
             </Grid>
 
-            <Grid container item spacing={2} justifyContent={"space-between"}>
-              <Grid item md={3}>
-                <CryptoButtons
-                  setSelectedCrypto={setCryptoFirst}
-                  selectedCrypto={cryptoFirst}
-                ></CryptoButtons>
-              </Grid>
-              <Grid item md={3} justifyContent={"right"}>
-                <SecondCryptoButtons
-                  setSelectedCrypto={setCryptoSecond}
-                  selectedCrypto={cryptoSecond}
-                ></SecondCryptoButtons>
-              </Grid>
+            <Grid
+              container
+              item
+              justifyContent={"space-between"}
+              sx={{
+                flexDirection: { xs: "column", md: "row" },
+                rowGap: { xs: "15px" },
+              }}
+            >
+              <CryptoButtons
+                setSelectedCrypto={setCryptoFirst}
+                selectedCrypto={cryptoFirst}
+              ></CryptoButtons>
+              <SecondCryptoButtons
+                setSelectedCrypto={setCryptoSecond}
+                selectedCrypto={cryptoSecond}
+              ></SecondCryptoButtons>
             </Grid>
 
-            <Grid container item justifyContent={"space-between"}>
-              <Grid item md={4}>
-                <TextField
-                  onChange={(e) => setInputFirst(+e.target.value)}
-                  value={inputFirst}
-                  id="filled-basic"
-                  label="Crypto"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item md={1} alignContent="center">
-                <IconButton
-                  onClick={() => {
-                    changeOrder();
-                  }}
-                  color="primary"
-                >
-                  <CurrencyExchangeIcon></CurrencyExchangeIcon>
-                </IconButton>
-              </Grid>
-              <Grid item md={4} mr={5}>
-                <TextField
-                  disabled
-                  // onChange={(e) => setInputSecond(+e.target.value)}
-                  value={inputFirst * pairCurrence}
-                  label="Crypto"
-                  id="filled-basic"
-                  variant="outlined"
-                />
-              </Grid>
+            <Grid
+              container
+              item
+              justifyContent={"space-between"}
+              sx={{ flexDirection: { xs: "column", md: "row" } }}
+            >
+              <TextField
+                onChange={(e) => setInputFirst(+e.target.value)}
+                value={inputFirst}
+                id="filled-basic"
+                label="Crypto"
+                variant="outlined"
+              />
+              <IconButton
+                onClick={() => {
+                  changeOrder();
+                }}
+                color="primary"
+              >
+                <CurrencyExchangeIcon></CurrencyExchangeIcon>
+              </IconButton>
+              <TextField
+                disabled
+                // onChange={(e) => setInputSecond(+e.target.value)}
+                value={inputFirst * pairCurrence}
+                label="Crypto"
+                id="filled-basic"
+                variant="outlined"
+              />
             </Grid>
 
             <Grid item mb={2}>

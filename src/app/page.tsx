@@ -62,61 +62,64 @@ export default function AppPage() {
   }, [selectedCrypto, selectedFiat]);
 
   const standartOrder = (
-    <Grid item md={8}>
-      <Card variant="outlined">
+    <Grid item md={10} lg={8}>
+      <Card variant="outlined" sx={{ paddingRight: "50px" }}>
         <CardContent>
-          <Grid container spacing={2} item m={1}>
+          <Grid container item spacing={2} m={1}>
             <Grid item>
               <Header></Header>
             </Grid>
 
-            <Grid container item spacing={2} justifyContent={"space-between"}>
-              <Grid item md={3}>
-                <CryptoButtons
-                  setSelectedCrypto={setSelectedCrypto}
-                  selectedCrypto={selectedCrypto}
-                ></CryptoButtons>
-              </Grid>
-              <Grid item md={3} justifyContent={"right"}>
-                <FiatButtons
-                  setSelectedFiat={setSelectedFiat}
-                  selectedFiat={selectedFiat}
-                ></FiatButtons>
-              </Grid>
+            <Grid
+              container
+              item
+              justifyContent={"space-between"}
+              sx={{
+                flexDirection: { xs: "column", md: "row" },
+                rowGap: { xs: "15px" },
+              }}
+            >
+              <CryptoButtons
+                setSelectedCrypto={setSelectedCrypto}
+                selectedCrypto={selectedCrypto}
+              ></CryptoButtons>
+              <FiatButtons
+                setSelectedFiat={setSelectedFiat}
+                selectedFiat={selectedFiat}
+              ></FiatButtons>
             </Grid>
 
-            <Grid container item justifyContent={"space-between"}>
-              <Grid item md={4}>
-                <TextField
-                  onChange={(e) => {
-                    setCryptoInput(+e.target.value);
-                  }}
-                  value={cryptoInput}
-                  id="filled-basic"
-                  label="Crypto"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item md={1} alignContent="center">
-                <IconButton
-                  onClick={() => {
-                    changeOrder();
-                    setFiatInput(cryptoInput * pairCurrence);
-                  }}
-                  color="primary"
-                >
-                  <CurrencyExchangeIcon></CurrencyExchangeIcon>
-                </IconButton>
-              </Grid>
-              <Grid item md={4} mr={5}>
-                <TextField
-                  disabled
-                  value={cryptoInput * pairCurrence}
-                  label="Fiat"
-                  id="filled-basic"
-                  variant="outlined"
-                />
-              </Grid>
+            <Grid
+              container
+              item
+              justifyContent={"space-between"}
+              sx={{ flexDirection: { xs: "column", md: "row" } }}
+            >
+              <TextField
+                onChange={(e) => {
+                  setCryptoInput(+e.target.value);
+                }}
+                value={cryptoInput}
+                id="filled-basic"
+                label="Crypto"
+                variant="outlined"
+              />
+              <IconButton
+                onClick={() => {
+                  changeOrder();
+                  setFiatInput(cryptoInput * pairCurrence);
+                }}
+                color="primary"
+              >
+                <CurrencyExchangeIcon></CurrencyExchangeIcon>
+              </IconButton>
+              <TextField
+                disabled
+                value={cryptoInput * pairCurrence}
+                label="Fiat"
+                id="filled-basic"
+                variant="outlined"
+              />
             </Grid>
 
             <Grid item mb={2}>
@@ -129,59 +132,62 @@ export default function AppPage() {
   );
 
   const reverseOrder = (
-    <Grid item md={8}>
-      <Card variant="outlined">
+    <Grid item md={10} lg={8}>
+      <Card variant="outlined" sx={{ paddingRight: "50px" }}>
         <CardContent>
           <Grid container spacing={2} item m={1}>
             <Grid item>
               <Header></Header>
             </Grid>
 
-            <Grid container item spacing={2} justifyContent={"space-between"}>
-              <Grid item md={3}>
-                <FiatButtons
-                  setSelectedFiat={setSelectedFiat}
-                  selectedFiat={selectedFiat}
-                ></FiatButtons>
-              </Grid>
-              <Grid item md={3} justifyContent={"right"}>
-                <CryptoButtons
-                  setSelectedCrypto={setSelectedCrypto}
-                  selectedCrypto={selectedCrypto}
-                ></CryptoButtons>
-              </Grid>
+            <Grid
+              container
+              item
+              justifyContent={"space-between"}
+              sx={{
+                flexDirection: { xs: "column", md: "row" },
+                rowGap: { xs: "15px" },
+              }}
+            >
+              <FiatButtons
+                setSelectedFiat={setSelectedFiat}
+                selectedFiat={selectedFiat}
+              ></FiatButtons>
+              <CryptoButtons
+                setSelectedCrypto={setSelectedCrypto}
+                selectedCrypto={selectedCrypto}
+              ></CryptoButtons>
             </Grid>
 
-            <Grid container item justifyContent={"space-between"}>
-              <Grid item md={4}>
-                <TextField
-                  onChange={(e) => setFiatInput(+e.target.value)}
-                  value={fiatInput}
-                  label="Fiat"
-                  id="filled-basic"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item md={1} alignContent="center">
-                <IconButton
-                  onClick={() => {
-                    changeOrder();
-                    setCryptoInput(fiatInput / pairCurrence);
-                  }}
-                  color="primary"
-                >
-                  <CurrencyExchangeIcon></CurrencyExchangeIcon>
-                </IconButton>
-              </Grid>
-              <Grid item md={4} mr={5}>
-                <TextField
-                  disabled
-                  value={fiatInput / pairCurrence}
-                  id="filled-basic"
-                  label="Crypto"
-                  variant="outlined"
-                />
-              </Grid>
+            <Grid
+              container
+              item
+              justifyContent={"space-between"}
+              sx={{ flexDirection: { xs: "column", md: "row" } }}
+            >
+              <TextField
+                onChange={(e) => setFiatInput(+e.target.value)}
+                value={fiatInput}
+                label="Fiat"
+                id="filled-basic"
+                variant="outlined"
+              />
+              <IconButton
+                onClick={() => {
+                  changeOrder();
+                  setCryptoInput(fiatInput / pairCurrence);
+                }}
+                color="primary"
+              >
+                <CurrencyExchangeIcon></CurrencyExchangeIcon>
+              </IconButton>
+              <TextField
+                disabled
+                value={fiatInput / pairCurrence}
+                id="filled-basic"
+                label="Crypto"
+                variant="outlined"
+              />
             </Grid>
 
             <Grid item mb={2}>
